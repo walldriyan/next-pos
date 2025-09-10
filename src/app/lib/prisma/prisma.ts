@@ -1,6 +1,7 @@
 // src/lib/prisma/prisma.ts
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client"
+
 
 // PrismaClient එක global scope එකට දානවා
 // මේකෙන් තමයි development එකේදී hot reloading වලදී අලුත් instances හැදෙන්නේ නැති වෙන්නේ

@@ -25,12 +25,23 @@ datasource db {
   url      = "file:./dev.db" 
 }
 
+// prisma/schema.prisma
+
 model Company {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  users     User[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String    @id @default(uuid())
+  name            String    @unique
+  legalName       String?   // නීතිමය නම (LLC, Inc. වගේ)
+  address         String?
+  city            String?
+  country         String?
+  phone           String?
+  email           String?
+  website         String?
+  currency        String    @default("LKR") // POS transactions වලට අවශ්‍ය මුදල් වර්ගය
+  isActive        Boolean   @default(true)  // Company එක active ද නැද්ද කියලා
+  users           User[]    // Company එකට අයිති users
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
 
 model User {
