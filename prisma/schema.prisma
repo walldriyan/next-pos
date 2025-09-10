@@ -1,65 +1,37 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-// generator client {
-//   provider = "prisma-client-js"
-//   output   = "../src/generated/prisma"
-// }
-
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
-// prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite" 
-  url      = "file:./dev.db" 
-}
-
-// prisma/schema.prisma
-
-model Company {
-  id              String    @id @default(uuid())
-  name            String    @unique
-  legalName       String?   // නීතිමය නම (LLC, Inc. වගේ)
-  address         String?
-  city            String?
-  country         String?
-  phone           String?
-  email           String?
-  website         String?
-  currency        String    @default("LKR") // POS transactions වලට අවශ්‍ය මුදල් වර්ගය
-  isActive        Boolean   @default(true)  // Company එක active ද නැද්ද කියලා
-  users           User[]    // Company එකට අයිති users
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id           String   @id @default(uuid())
-  email        String   @unique
-  password     String
-  name         String
-  role         Role     @default(USER)
-  companyId    String
-  company      Company  @relation(fields: [companyId], references: [id])
-  permissions  Json
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  password    String
+  role        String   @default("USER")
+  permissions String   @default("[]") // JSON string format එකට
+  companyId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("users")
 }
 
-enum Role {
-  ADMIN
-  MANAGER
-  CASHIER
-  USER
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("companies")
 }
