@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Sidebar from "./components/dashbord/Sidebar";
 
 // ඔයාගේ page.tsx file එකේ
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
 
   // AuthGuard එක පාවිච්චි කරන්න
   return (
+    <>
     <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
@@ -63,7 +65,12 @@ export default function Home() {
         >
           Logout
         </button>
+       
       </div>
-    </AuthGuard>
+    </AuthGuard> 
+    
+    <Sidebar />
+    
+    </>
   );
 }

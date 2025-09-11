@@ -57,6 +57,21 @@ async function setupDatabase() {
         companyId: 'company1',
       },
     });
+
+    const normalUser = await prisma.user.upsert({
+      where: { email: 'nomaluser@test.com' },
+      update: {
+        password: hashedPassword,
+      },
+      create: {
+        email: 'nomaluser@test.com',
+        name: 'nomaluser',
+        password: hashedPassword,
+        role: 'NORMAL',
+        permissions: JSON.stringify(['NO', 'NO']),
+        companyId: 'company1',
+      },
+    });
     
     console.log('✅ Admin user created:', adminUser.email);
     console.log('✅ Manager user created:', managerUser.email);

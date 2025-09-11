@@ -33,7 +33,7 @@ export default function LoginPage() {
 
       if (result?.error) {
         // console.error("Login error:", result.error);
-
+        router.push("error/");
         // Error types handle කරන්න
         if (result.error === "CredentialsSignin") {
           setError("ඊමේල් හෝ මුරපදය වැරදියි");
