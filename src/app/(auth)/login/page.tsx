@@ -13,14 +13,14 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
 
   // URL එකේ error parameter එක check කරන්න
-  const urlError = searchParams.get('error');
+  const urlError = searchParams.get("error");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
-    console.log("Login attempt for:", email);
+    // console.log("Login attempt for:", email);
 
     try {
       const result = await signIn("credentials", {
@@ -29,11 +29,11 @@ export default function LoginPage() {
         redirect: false,
       });
 
-      console.log("SignIn result:", result);
+      // console.log("SignIn result:", result);
 
       if (result?.error) {
-        console.error("Login error:", result.error);
-        
+        // console.error("Login error:", result.error);
+
         // Error types handle කරන්න
         if (result.error === "CredentialsSignin") {
           setError("ඊමේල් හෝ මුරපදය වැරදියි");
@@ -42,11 +42,11 @@ export default function LoginPage() {
         }
       } else if (result?.ok) {
         console.log("Login successful, checking session...");
-        
+
         // Session එක manually refresh කරන්න
         const session = await getSession();
         console.log("Updated session:", session);
-        
+
         if (session?.user) {
           console.log("Redirecting to home...");
           router.push("/");
@@ -66,7 +66,7 @@ export default function LoginPage() {
   // URL error handle කරන්න
   const getErrorMessage = () => {
     if (error) return error;
-    
+
     switch (urlError) {
       case "CredentialsSignin":
         return "ඊමේල් හෝ මුරපදය වැරදියි";
@@ -84,13 +84,13 @@ export default function LoginPage() {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             ඔයාගේ Account එකට Login වෙන්න
           </h2>
-          {process.env.NODE_ENV === 'development' && (
+          {process.env.NODE_ENV === "development" && (
             <p className="text-sm text-center text-gray-500 mt-2">
               Development Mode: Debug logs console එකේ පෙන්නෙනවා
             </p>
           )}
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -143,9 +143,25 @@ export default function LoginPage() {
             >
               {isLoading ? (
                 <span className="flex items-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Login වෙනවා...
                 </span>
@@ -156,10 +172,16 @@ export default function LoginPage() {
           </div>
 
           <div className="bg-gray-100 p-4 rounded-md">
-            <p className="text-center text-sm text-gray-600 font-semibold mb-2">Test Accounts:</p>
+            <p className="text-center text-sm text-gray-600 font-semibold mb-2">
+              Test Accounts:
+            </p>
             <div className="space-y-1 text-xs text-gray-700">
-              <p><strong>Admin:</strong> admin@test.com / 123456</p>
-              <p><strong>Manager:</strong> manager@test.com / 123456</p>
+              <p>
+                <strong>Admin:</strong> admin@test.com / 123456
+              </p>
+              <p>
+                <strong>Manager:</strong> manager@test.com / 123456
+              </p>
             </div>
           </div>
         </form>
