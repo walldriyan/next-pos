@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Sidebar from "./components/dashbord/Sidebar";
+
 
 // ඔයාගේ page.tsx file එකේ
 export default function Home() {
