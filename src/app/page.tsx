@@ -37,6 +37,24 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
+  
+    return (
+      <div>
+        <p>Session Status: {status}</p>
+        {session?.user && (
+          <div>
+            <p>Logged in as: {session.user.name}</p>
+            <p>Email: {session.user.email}</p>
+            <p>Role: {session.user.role}</p>
+            <p>Company ID: {session.user.companyId}</p>
+            <p>Permissions: {session.user.permissions?.join(", ")}</p>
+          </div>
+        )}
+      </div>
+    );
+
+
+
   // Not authenticated නම් login page එකට redirect කරන්න
   if (status === "unauthenticated") {
     return (
@@ -58,7 +76,7 @@ export default function Home() {
     <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
-        <p className="mt-4 text-lg text-gray-600">You are logged in as {session?.user?.name}.</p>
+        {/* <p className="mt-4 text-lg text-gray-600">You are logged in as {session?.user?.name}.</p> */}
         <button 
           onClick={() => signOut()}
           className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
@@ -69,7 +87,7 @@ export default function Home() {
       </div>
     </AuthGuard> 
     
-    <Sidebar />
+    {/* <Sidebar /> */}
     
     </>
   );

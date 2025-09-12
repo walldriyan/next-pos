@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // SessionProvider එක import කරන්න
 import { getServerSession } from "next-auth";
-import { authOptions } from "./lib/authOptions";
+import { authOptions } from "./(auth)/authOptions";
 import SessionProvider from "./(auth)/SessionProvider";
 
 
