@@ -1,3 +1,4 @@
+import { Button, Flex, Text } from "@radix-ui/themes";
 import { signOut, useSession } from "next-auth/react";
 import React from "react";
 
@@ -5,7 +6,14 @@ function StatusInfo() {
   const { data: session, status } = useSession();
 
   return (
-    <div className=" p-4">
+    <div className="p-4">
+
+      <Flex direction="column" gap="2">
+        <Text>Hello from Radix Themes </Text>
+        <Button>Let's go</Button>
+      </Flex>
+
+
       <button
         onClick={() => signOut()}
         className="bg-blue-500  text-xs text-white px-4 my-2 py-2 rounded"

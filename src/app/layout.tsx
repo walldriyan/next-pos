@@ -2,13 +2,15 @@
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
+
 // SessionProvider එක import කරන්න
 import { getServerSession } from "next-auth";
 import { authOptions } from "./(auth)/authOptions";
 import SessionProvider from "./(auth)/SessionProvider";
-
-
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,7 +26,8 @@ export const metadata: Metadata = {
   description: "A multi-company POS system with Next.js and Prisma",
 };
 
-export default async function RootLayout({ // RootLayout එක async කරන්න
+export default async function RootLayout({
+  // RootLayout එක async කරන්න
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -37,8 +40,10 @@ export default async function RootLayout({ // RootLayout එක async කරන�
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* SessionProvider එකට session prop එක pass කරන්න */}
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          {" "}
+          <Theme>{children}</Theme>
+        </SessionProvider>
       </body>
     </html>
   );
