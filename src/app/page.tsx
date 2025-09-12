@@ -1,10 +1,9 @@
-"use client"
-
+"use client";
 import { useEffect } from "react";
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import StatusInfo from "./components/statusinfo/StatusInfo";
 
 // ඔයාගේ page.tsx file එකේ
 export default function Home() {
@@ -14,8 +13,15 @@ export default function Home() {
   useEffect(() => {
     if (status === "authenticated" && session?.user) {
       const { user } = session;
-      
-      if (user.id && user.email && user.name && user.role && user.permissions && user.companyId) {
+
+      if (
+        user.id &&
+        user.email &&
+        user.name &&
+        user.role &&
+        user.permissions &&
+        user.companyId
+      ) {
         login({
           id: user.id, // .toString() remove කරන්න
           email: user.email,
@@ -37,30 +43,12 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
-  
-    return (
-      <div>
-        <p>Session Status: {status}</p>
-        {session?.user && (
-          <div>
-            <p>Logged in as: {session.user.name}</p>
-            <p>Email: {session.user.email}</p>
-            <p>Role: {session.user.role}</p>
-            <p>Company ID: {session.user.companyId}</p>
-            <p>Permissions: {session.user.permissions?.join(", ")}</p>
-          </div>
-        )}
-      </div>
-    );
-
-
-
   // Not authenticated නම් login page එකට redirect කරන්න
   if (status === "unauthenticated") {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <h1 className="text-2xl font-bold mb-4">Please Login</h1>
-        <button 
+        <button
           onClick={() => signIn()}
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
@@ -73,22 +61,20 @@ export default function Home() {
   // AuthGuard එක පාවිච්චි කරන්න
   return (
     <>
-    <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
-        {/* <p className="mt-4 text-lg text-gray-600">You are logged in as {session?.user?.name}.</p> */}
-        <button 
-          onClick={() => signOut()}
-          className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
-       
-      </div>
-    </AuthGuard> 
-    
-    {/* <Sidebar /> */}
-    
+      <StatusInfo />
+      <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
+          <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
+          {/* <p className="mt-4 text-lg text-gray-600">You are logged in as {session?.user?.name}.</p> */}
+          <button
+            onClick={() => signOut()}
+            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Logout
+          </button>
+        </div>
+      </AuthGuard>
+
     </>
   );
 }
