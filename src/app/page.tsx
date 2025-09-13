@@ -4,12 +4,9 @@ import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
 import StatusInfo from "./components/statusinfo/StatusInfo";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/app/components/ui/accordion"; // Corrected import path
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/UI/accordion";
+import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
+
 
 // ඔයාගේ page.tsx file එකේ
 export default function Home() {
@@ -60,6 +57,40 @@ export default function Home() {
         >
           Go to Login hi
         </button>
+
+        <AlertDialog.Root>
+	<AlertDialog.Trigger>
+		<Button color="red">Revoke access</Button>
+	</AlertDialog.Trigger>
+	<AlertDialog.Content maxWidth="450px">
+		<AlertDialog.Title>Revoke access</AlertDialog.Title>
+		<AlertDialog.Description size="2">
+			Are you sure? This application will no longer be accessible and any
+			existing sessions will be expired.
+		</AlertDialog.Description>
+
+		<Flex gap="3" mt="4" justify="end">
+			<AlertDialog.Cancel>
+				<Button variant="soft" color="gray">
+					Cancel
+				</Button>
+			</AlertDialog.Cancel>
+			<AlertDialog.Action>
+				<Button variant="solid" color="red">
+					Revoke access
+				</Button>
+			</AlertDialog.Action>
+		</Flex>
+	</AlertDialog.Content>
+</AlertDialog.Root>
+
+
+
+        <Flex align="center" gap="4">
+	<Spinner size="1" />
+	<Spinner size="2" />
+	<Spinner size="3" />
+</Flex>
 
   <Accordion type="single" collapsible className="w-full max-w-md mt-8">
           <AccordionItem value="item-1">
