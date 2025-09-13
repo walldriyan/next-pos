@@ -61,7 +61,7 @@ export default function Home() {
           Go to Login
         </button>
 
-        <Accordion type="single" collapsible className="w-full max-w-md mt-8">
+  <Accordion type="single" collapsible className="w-full max-w-md mt-8">
           <AccordionItem value="item-1">
             <AccordionTrigger>Is it accessible?</AccordionTrigger>
             <AccordionContent>
@@ -82,6 +82,7 @@ export default function Home() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+      
       </div>
     );
   }
