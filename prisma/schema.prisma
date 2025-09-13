@@ -2,36 +2,23 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
   id          String   @id @default(cuid())
   email       String   @unique
-  name        String
+  name        String?
   password    String
-  role        String   @default("USER")
-  permissions String   @default("[]") // JSON string format එකට
+  role        String
+  permissions String // JSON string
   companyId   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  @@map("users")
-}
-
-model Company {
-  id        String   @id @default(cuid())
-  name      String
-  email     String?
-  phone     String?
-  address   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("companies")
 }
