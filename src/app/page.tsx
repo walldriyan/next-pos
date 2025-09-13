@@ -4,6 +4,12 @@ import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
 import StatusInfo from "./components/statusinfo/StatusInfo";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/app/components/ui/accordion"; // Corrected import path
 
 // ඔයාගේ page.tsx file එකේ
 export default function Home() {
@@ -23,7 +29,7 @@ export default function Home() {
         user.companyId
       ) {
         login({
-          id: user.id, // .toString() remove කරන්න
+          id: user.id,
           email: user.email,
           name: user.name,
           role: user.role,
@@ -54,6 +60,28 @@ export default function Home() {
         >
           Go to Login
         </button>
+
+        <Accordion type="single" collapsible className="w-full max-w-md mt-8">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Is it styled?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It comes with default styles that matches the other
+              components aesthetic.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              Yes. Its animated by default, but you can disable it if you prefer.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </div>
     );
   }
