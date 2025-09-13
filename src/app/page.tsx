@@ -58,7 +58,7 @@ export default function Home() {
           onClick={() => signIn()}
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Go to Login
+          Go to Login hi
         </button>
 
   <Accordion type="single" collapsible className="w-full max-w-md mt-8">
