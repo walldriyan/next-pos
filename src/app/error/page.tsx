@@ -1,3 +1,4 @@
+
 // src/app/error/page.tsx
 "use client";
 
@@ -8,13 +9,14 @@ export default function ErrorPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState("");
+  const [errorDetails, setErrorDetails] = useState("");
 
   useEffect(() => {
     const errorType = searchParams.get("error");
     
     switch (errorType) {
       case "CredentialsSignin":
-        setError("ඊමේල් හෝ මුරපදය වැරදියි");
+        setError("ඊමේල් හෝ මුරපදය වැරදියි (CredentialsSignin)");
         break;
       case "Configuration":
         setError("Server configuration issue එකක් තියෙනවා");
@@ -28,6 +30,17 @@ export default function ErrorPage() {
       default:
         setError(errorType || "Unknown error occurred");
     }
+
+    // අනිත් හැම URL parameter එකක්ම details විදියට පෙන්නනවා
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('error'); // error parameter එක ආයෙ පෙන්නන්න ඕන නෑ
+    if(params.toString()){
+        setErrorDetails(`Details: ${params.toString()}`);
+    }
+
+    // Console එකේ සම්පූර්ණ URL එක log කරනවා
+    console.log(`Error Page Loaded. Full Query: ${searchParams.toString()}`);
+
   }, [searchParams]);
 
   const handleRetry = () => {
@@ -63,10 +76,11 @@ export default function ErrorPage() {
             Something went wrong!
           </h2>
           
-          <div className="mt-4 bg-red-50 border border-red-200 rounded-md p-4">
+          <div className="mt-4 bg-red-50 border border-red-200 rounded-md p-4 text-left">
             <p className="text-sm text-red-800">
-              <strong>Error:</strong> {error}
+              <strong>Error Type:</strong> {error}
             </p>
+            {errorDetails && <p className="text-sm text-red-700 mt-2 font-mono">{errorDetails}</p>}
           </div>
 
           <p className="mt-2 text-center text-sm text-gray-600">
@@ -94,7 +108,7 @@ export default function ErrorPage() {
         {process.env.NODE_ENV === 'development' && (
           <div className="mt-6 p-4 bg-gray-100 rounded-md">
             <p className="text-xs text-gray-600 font-mono">
-              Debug Info: {searchParams.toString()}
+              Debug Info (Full Query): {searchParams.toString()}
             </p>
           </div>
         )}

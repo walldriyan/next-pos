@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -20,7 +21,7 @@ export default function LoginPage() {
     setIsLoading(true);
     setError("");
 
-    // console.log("Login attempt for:", email);
+    console.log("Login attempt for:", email);
 
     try {
       const result = await signIn("credentials", {
@@ -29,20 +30,17 @@ export default function LoginPage() {
         redirect: false,
       });
 
-      // console.log("SignIn result:", result);
+      console.log("SignIn result:", result);
 
       if (result?.error) {
-        // console.error("Login error:", result.error);
-        router.push("/error");
-        // Error types handle කරන්න
-        if (result.error === "CredentialsSignin") {
-          setError("ඊමේල් හෝ මුරපදය වැරදියි");
-        } else {
-          setError("Login කරන්න බැරි වුණා. නැවත උත්සහ කරන්න.");
-        }
-      } else if (result?.ok) {
+        console.error("Full Login error object:", result);
+        // Error පිටුවට redirect කරනකොට error එක pass කරනවා
+        router.push(`/error?error=${result.error}`);
+        return; // Redirect එකෙන් පස්සේ function එක නවත්වනවා
+      } 
+      
+      if (result?.ok) {
         console.log("Login successful, checking session...");
-
         // Session එක manually refresh කරන්න
         const session = await getSession();
         console.log("Updated session:", session);
@@ -129,9 +127,9 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {getErrorMessage() && (
+          {(getErrorMessage() || error) && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-sm">
-              {getErrorMessage()}
+              {error || getErrorMessage()}
             </div>
           )}
 
