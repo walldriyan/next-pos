@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
-import StatusInfo from "./components/statusinfo/StatusInfo";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./components/UI/accordion";
+import StatusInfo from "@/components/statusinfo/StatusInfo";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
 
 
@@ -55,7 +55,7 @@ export default function Home() {
           onClick={() => signIn()}
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Go to Login hi
+          Go to Login
         </button>
 
         <AlertDialog.Root>
