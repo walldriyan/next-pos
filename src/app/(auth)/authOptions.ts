@@ -118,7 +118,7 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/login", // Correct path
-    error: "/login", // Error page redirect කරන්න
+    error: "/error", // Error page redirect කරන්න
   },
 
   debug: process.env.NODE_ENV === "development", // Development mode එකේ debug on කරන්න

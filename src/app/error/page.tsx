@@ -13,7 +13,8 @@ export default function ErrorPage() {
 
   useEffect(() => {
     const errorType = searchParams.get("error");
-    
+    console.log('hi bro ',searchParams);
+
     switch (errorType) {
       case "CredentialsSignin":
         setError("ඊමේල් හෝ මුරපදය වැරදියි (CredentialsSignin)");

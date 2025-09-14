@@ -1,11 +1,16 @@
-
 "use client";
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, getSession, useSession } from "next-auth/react";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import StatusInfo from "@/components/statusinfo/StatusInfo";
 
 export default function LoginPage() {
+  const { status } = useSession();
+
+
+
+  console.log("status : ", status);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +42,8 @@ export default function LoginPage() {
         // Error පිටුවට redirect කරනකොට error එක pass කරනවා
         router.push(`/error?error=${result.error}`);
         return; // Redirect එකෙන් පස්සේ function එක නවත්වනවා
-      } 
-      
+      }
+
       if (result?.ok) {
         console.log("Login successful, checking session...");
         // Session එක manually refresh කරන්න
@@ -167,6 +172,11 @@ export default function LoginPage() {
                 "Login"
               )}
             </button>
+          </div>
+
+          <div>
+            {" "}
+            <StatusInfo />
           </div>
 
           <div className="bg-gray-100 p-4 rounded-md">

@@ -58,61 +58,6 @@ export default function Home() {
           Go to Login
         </button>
 
-        <AlertDialog.Root>
-	<AlertDialog.Trigger>
-		<Button color="red">Revoke access</Button>
-	</AlertDialog.Trigger>
-	<AlertDialog.Content maxWidth="450px">
-		<AlertDialog.Title>Revoke access</AlertDialog.Title>
-		<AlertDialog.Description size="2">
-			Are you sure? This application will no longer be accessible and any
-			existing sessions will be expired.
-		</AlertDialog.Description>
-
-		<Flex gap="3" mt="4" justify="end">
-			<AlertDialog.Cancel>
-				<Button variant="soft" color="gray">
-					Cancel
-				</Button>
-			</AlertDialog.Cancel>
-			<AlertDialog.Action>
-				<Button variant="solid" color="red">
-					Revoke access
-				</Button>
-			</AlertDialog.Action>
-		</Flex>
-	</AlertDialog.Content>
-</AlertDialog.Root>
-
-
-
-        <Flex align="center" gap="4">
-	<Spinner size="1" />
-	<Spinner size="2" />
-	<Spinner size="3" />
-</Flex>
-
-  <Accordion type="single" collapsible className="w-full max-w-md mt-8">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Is it accessible?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>Is it styled?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It comes with default styles that matches the other
-              components aesthetic.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>Is it animated?</AccordionTrigger>
-            <AccordionContent>
-              Yes. Its animated by default, but you can disable it if you prefer.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
       
       </div>
     );
