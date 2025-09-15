@@ -1,9 +1,9 @@
 "use client";
 
 import * as Dialog from "@radix-ui/react-dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+
 import { Cross2Icon, UpdateIcon } from "@radix-ui/react-icons";
-import { useDrawer } from "../../../../../useDrawer";
+import { useDrawer } from "./useDrawer";
 
 export const Drawer = () => {
   const { isOpen, isLoading, error, closeDrawer, content, props } = useDrawer();

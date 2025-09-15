@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { DrawerContext } from "./src/app/components/UI/drawer/DrawerProvider";
+import { DrawerContext } from "./DrawerProvider";
 
 export const useDrawer = () => {
   const context = useContext(DrawerContext);

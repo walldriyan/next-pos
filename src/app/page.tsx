@@ -5,7 +5,7 @@ import { Button } from "@radix-ui/themes";
 
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useDrawer } from "../../useDrawer";
+import { useDrawer } from "./components/UI/drawer/useDrawer";
 
 
 // Drawer එකේ content එක ලෙස පෙන්වන component එක
