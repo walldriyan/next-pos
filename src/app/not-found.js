@@ -12,7 +12,7 @@ export default function NotFound() {
       <p>ඔබ සොයන පිටුව නොපවතියි.</p>
       
       {/* login page එකට යාමට link එක */}
-      <Link href="/login" style={{
+      <Link href="/" style={{
         marginTop: '20px',
         display: 'inline-block',
         padding: '10px 20px',
