@@ -6,7 +6,7 @@ import { Cross2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { useDrawer } from "../../../../../useDrawer";
 
 export const Drawer = () => {
-  const { isOpen, isLoading, closeDrawer, content, props } = useDrawer();
+  const { isOpen, isLoading, error, closeDrawer, content, props } = useDrawer();
   const { width = "w-[300px]", overlayClosable = false, title = "Drawer" } = props;
 
   return (
@@ -31,6 +31,10 @@ export const Drawer = () => {
             {isLoading ? (
               <div className="flex h-full items-center justify-center">
                 <UpdateIcon className="h-8 w-8 animate-spin text-gray-500" />
+              </div>
+            ) : error ? (
+              <div className="flex h-full flex-col items-center justify-center p-4 text-center">
+                <p className="text-red-500">{error}</p>
               </div>
             ) : (
               content
