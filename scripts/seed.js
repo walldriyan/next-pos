@@ -40,6 +40,7 @@ async function setupDatabase() {
         role: 'ADMIN',
         permissions: JSON.stringify(['CREATE', 'READ', 'UPDATE', 'DELETE']),
         companyId: 'company1',
+        is2FAEnabled: false
       },
     });
     
@@ -55,6 +56,7 @@ async function setupDatabase() {
         role: 'MANAGER',
         permissions: JSON.stringify(['READ', 'UPDATE']),
         companyId: 'company1',
+         is2FAEnabled: false
       },
     });
 
@@ -70,6 +72,7 @@ async function setupDatabase() {
         role: 'NORMAL',
         permissions: JSON.stringify(['NO', 'NO']),
         companyId: 'company1',
+         is2FAEnabled: false
       },
     });
     

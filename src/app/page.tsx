@@ -1,52 +1,15 @@
 "use client";
-import { useEffect } from "react";
+
 import { AuthGuard } from "./(auth)/AuthGuard";
-import { useUserStore } from "./states/userStore";
 import { signIn, signOut, useSession } from "next-auth/react";
-import StatusInfo from "@/components/statusinfo/StatusInfo";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
 
-
-// ඔයාගේ page.tsx file එකේ
 export default function Home() {
   const { data: session, status } = useSession();
-  const { login, logout } = useUserStore();
 
-  useEffect(() => {
-    if (status === "authenticated" && session?.user) {
-      const { user } = session;
-
-      if (
-        user.id &&
-        user.email &&
-        user.name &&
-        user.role &&
-        user.permissions &&
-        user.companyId
-      ) {
-        login({
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-          permissions: user.permissions,
-          companyId: user.companyId,
-        });
-      }
-    } else if (status === "unauthenticated") {
-      logout();
-      // Auto redirect remove කරන්න - user manually login කරන්න ඕන
-      // signIn(); // මේක comment කරන්න
-    }
-  }, [status, session, login, logout]);
-
-  // Loading state
   if (status === "loading") {
     return <div>Loading...</div>;
   }
 
-  // Not authenticated නම් login page එකට redirect කරන්න
   if (status === "unauthenticated") {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
@@ -57,17 +20,14 @@ export default function Home() {
         >
           Go to Login
         </button>
-
-      
       </div>
     );
   }
 
-  // AuthGuard එක පාවිච්චි කරන්න
   return (
     <>
-      <StatusInfo />
-      
+    <div>{session?.user?.name}</div>
+    <div>{session?.user?.permissions}</div>
       <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
           <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
@@ -80,7 +40,6 @@ export default function Home() {
           </button>
         </div>
       </AuthGuard>
-
     </>
   );
 }

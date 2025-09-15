@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { signIn, getSession, useSession } from "next-auth/react";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
-import StatusInfo from "@/components/statusinfo/StatusInfo";
+
 
 export default function LoginPage() {
-  const { status } = useSession();
+  const {status } = useSession();
 
 
 
@@ -176,7 +176,7 @@ export default function LoginPage() {
 
           <div>
             {" "}
-            <StatusInfo />
+          {status}
           </div>
 
           <div className="bg-gray-100 p-4 rounded-md">

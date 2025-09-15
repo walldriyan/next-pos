@@ -9,6 +9,7 @@ declare module "next-auth/jwt" {
     role: string;
     permissions: string[];
     companyId: string;
+    is_authenticated?: boolean; // Authenticated ද යන්න පෙන්වීමට
   }
 }
 
@@ -22,6 +23,7 @@ declare module "next-auth" {
       role: string;
       permissions: string[];
       companyId: string;
+      is_authenticated?: boolean; // Authenticated ද යන්න පෙන්වීමට
     } & DefaultSession["user"];
   }
 
