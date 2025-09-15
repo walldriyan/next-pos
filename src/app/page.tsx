@@ -1,10 +1,33 @@
 "use client";
 
+import { Button } from "@radix-ui/themes";
+
+
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useDrawer } from "../../useDrawer";
+
+
+// Drawer එකේ content එක ලෙස පෙන්වන component එක
+const DrawerContent = () => (
+  <div className="p-4">
+    <h2 className="text-lg font-semibold">My Drawer Content</h2>
+    <p>This is some content inside the drawer.</p>
+  </div>
+);
+
 
 export default function Home() {
   const { data: session, status } = useSession();
+const { openDrawer } = useDrawer();
+
+const handleOpenDrawer = () => {
+    openDrawer(<DrawerContent />, {
+      title: "My Drawer", // Accessibility සඳහා title එකක්
+      width: 700, // Custom width (optional)
+      overlayClosable: true, // Overlay click එකෙන් close වීමට (optional)
+    });
+  };
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -38,6 +61,10 @@ export default function Home() {
           >
             Logout
           </button>
+
+          <Button onClick={handleOpenDrawer} className="mt-4">
+        Open Drawer
+      </Button>
         </div>
       </AuthGuard>
     </>

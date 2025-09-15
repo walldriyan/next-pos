@@ -1,25 +1,18 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 
 
 // SessionProvider එක import කරන්න
 import { getServerSession } from "next-auth";
 import { authOptions } from "./(auth)/authOptions";
 import SessionProvider from "./(auth)/SessionProvider";
+import { DrawerProvider } from "./components/UI/drawer/DrawerProvider";
+import { Drawer } from "./components/UI/drawer/Drawer";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Next.js POS",
@@ -38,12 +31,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
-        <SessionProvider session={session}>
-          {" "}
-          <Theme>{children}</Theme>
-        </SessionProvider>
+        <DrawerProvider>
+          <SessionProvider session={session}>
+            <Theme>{children}</Theme>
+            <Drawer />
+          </SessionProvider>
+        </DrawerProvider>
       </body>
     </html>
   );
