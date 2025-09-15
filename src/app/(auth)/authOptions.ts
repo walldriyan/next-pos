@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
         // 2FA සඳහා අමතර code එකක්
+        rememberMe: { label: "Remember Me", type: "checkbox" },
         otp: { label: "One-Time Password", type: "text", required: false },
       },
       async authorize(credentials) {
@@ -103,6 +104,7 @@ export const authOptions: NextAuthOptions = {
             role: user.role,
             permissions: JSON.parse(user.permissions), // JSON string එක array එකක් බවට පත් කරයි
             companyId: user.companyId,
+            rememberMe: credentials?.rememberMe,
           };
         } catch (error) {
           console.error("🚨 Authorize function error:", error);
@@ -130,6 +132,12 @@ export const authOptions: NextAuthOptions = {
         if (account?.provider === "credentials") {
           token.role = user.role;
           token.permissions = user.permissions;
+          // "Remember Me" තේරුවා නම් session එක දින 30ක්, නැත්නම් දින 1ක් තබාගන්න.
+          if ((user as any).rememberMe) {
+            token.exp = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days
+          } else {
+            token.exp = Math.floor(Date.now() / 1000) + 24 * 60 * 60; // 24 hours
+          }
           token.companyId = user.companyId;
           // token.is_authenticated = true; // මෙම property එක JWT type එකේ define කර නැත.
         }

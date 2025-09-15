@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   Flex,
+  Checkbox,
   Text,
   TextField,
 } from "@radix-ui/themes";
@@ -28,6 +29,7 @@ const getErrorMessage = (error: string | null) => {
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -44,6 +46,7 @@ export function LoginForm() {
       const result = await signIn("credentials", {
         email,
         password,
+        rememberMe,
         redirect: false,
       });
 
@@ -111,6 +114,16 @@ export function LoginForm() {
               </TextField.Slot>
             </TextField.Root>
           </div>
+
+       <Flex align="center" gap="2">
+            <Checkbox
+              id="remember-me"
+              checked={rememberMe}
+              onCheckedChange={(checked) => setRememberMe(checked === true)}
+            />
+            <label htmlFor="remember-me" className="text-sm">මාව මතක තබාගන්න</label>
+          </Flex>
+          
           {displayError && (
             <div className="bg-red-100 border border-red-400 text-red-700 p-3 rounded-md text-sm">
               <p>
