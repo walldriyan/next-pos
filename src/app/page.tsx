@@ -24,7 +24,7 @@ const { openDrawer } = useDrawer();
 const handleOpenDrawer = () => {
     openDrawer(<DrawerContent />, {
       title: "My Drawer", // Accessibility සඳහා title එකක්
-      width: 700, // Custom width (optional)
+      width: "w-1/2", // screen width එකෙන් 50%
       overlayClosable: true, // Overlay click එකෙන් close වීමට (optional)
     });
   };

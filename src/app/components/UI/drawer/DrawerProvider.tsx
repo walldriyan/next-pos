@@ -4,7 +4,7 @@ import React, { createContext, useState, useCallback, ReactNode } from "react";
 
 interface DrawerProps {
   title?: string;
-  width?: number;
+  width?: string;
   overlayClosable?: boolean;
 }
 
