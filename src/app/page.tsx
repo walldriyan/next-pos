@@ -1,12 +1,9 @@
 "use client";
 
 import { Button } from "@radix-ui/themes";
-
-
 import { AuthGuard } from "./(auth)/AuthGuard";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useDrawer } from "./components/UI/drawer/useDrawer";
-
 
 // Drawer එකේ content එක ලෙස පෙන්වන component එක
 const DrawerContent = () => (
@@ -16,12 +13,11 @@ const DrawerContent = () => (
   </div>
 );
 
-
 export default function Home() {
   const { data: session, status } = useSession();
-const { openDrawer } = useDrawer();
+  const { openDrawer } = useDrawer();
 
-const handleOpenDrawer = () => {
+  const handleOpenDrawer = () => {
     openDrawer(<DrawerContent />, {
       title: "My Drawer", // Accessibility සඳහා title එකක්
       width: "w-1/2", // screen width එකෙන් 50%
@@ -49,8 +45,8 @@ const handleOpenDrawer = () => {
 
   return (
     <>
-    <div>{session?.user?.name}</div>
-    <div>{session?.user?.permissions}</div>
+      <div>{session?.user?.name}</div>
+      <div>{session?.user?.permissions}</div>
       <AuthGuard requiredRoles={["ADMIN", "MANAGER"]}>
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
           <h1 className="text-4xl font-bold">Welcome to the Dashboard</h1>
@@ -63,8 +59,8 @@ const handleOpenDrawer = () => {
           </button>
 
           <Button onClick={handleOpenDrawer} className="mt-4">
-        Open Drawer
-      </Button>
+            Open Drawer
+          </Button>
         </div>
       </AuthGuard>
     </>

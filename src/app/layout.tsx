@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./(auth)/authOptions";
 import SessionProvider from "./(auth)/SessionProvider";
 import { DrawerProvider } from "./components/UI/drawer/DrawerProvider";
+import { Toaster } from "sonner";
 import { Drawer } from "./components/UI/drawer/Drawer";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
@@ -37,6 +38,7 @@ export default async function RootLayout({
           <SessionProvider session={session}>
             <Theme>{children}</Theme>
             <Drawer />
+            <Toaster richColors position="top-right" />
           </SessionProvider>
         </DrawerProvider>
       </body>
