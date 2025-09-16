@@ -36,6 +36,8 @@ import ShoppingCart from "./ShoppingCart";
 import DiscountBehaviorPanel from "./DiscountBehaviorPanel";
 import { CustomDiscountForm } from "./CustomDiscountForm";
 import { useDrawer } from "@/app/components/UI/drawer/useDrawer";
+import { TransactionDialogContent } from "./transaction/TransactionDialogContent";
+
 
 const initialDiscountResult = {
   lineItems: [],
@@ -331,20 +333,16 @@ function page() {
   };
 
   const openTransactionDrawer = () => {
-    // drawer.openDrawer({
-    //   title: 'Complete Transaction',
-    //   content: (
-    //     <TransactionDialogContent
-    //       cart={cart}
-    //       discountResult={discountResult}
-    //       transactionId={transactionId}
-    //       activeCampaign={activeCampaign}
-    //       onTransactionComplete={handleTransactionComplete}
-    //     />
-    //   ),
-    //   closeOnOverlayClick: false,
-    //   drawerClassName: "sm:max-w-4xl"
-    // });
+     openDrawer(<TransactionDialogContent
+          cart={cart}
+          discountResult={discountResult}
+          transactionId={transactionId}
+          activeCampaign={activeCampaign}
+          onTransactionComplete={handleTransactionComplete}
+        />, {
+      title: `Complete Transaction`,
+      width: "w-1/2",
+    });
   };
 
   /*  
